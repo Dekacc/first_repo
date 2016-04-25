@@ -67,6 +67,25 @@ bool doIntersect(Point p1, Point q1, Point p2, Point q2)
     return false; // Doesn't fall in any of the above cases
 }
 
+//returns the intersection point of the two lines
+Point intersectPoint(Point p1, Point q1, Point p2, Point q2){
+    double a = (p1.x * q1.y - p1.y * q1.x);
+    double b = (p2.x * q2.y - p2.y * q2.x);
+    double div = (p1.x - q1.x) * (p2.y - q2.y) - (p1.y - q1.y) * (p2.x - q2.x);
+
+    double x = (a * (p2.x - q2.x) - (p1.x - q1.x) * b) / div;
+    double y = (a * (p2.y - q2.y) - (p1.y - q1.y) * b) / div;
+
+    struct Point r = {x, y};
+
+    return r;
+}
+
+//returns true if two lines are parallel
+bool isParallel(Point p1, Point q1, Point p2, Point q2){
+    return ((p1.x - q1.x) * (p2.y - q2.y) - (p1.y - q1.y) * (p2.x - q2.x) == 0);
+}
+
 // Driver program to test above functions
 int main()
 {
